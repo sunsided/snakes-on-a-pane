@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\PositionComponent.cs" />
     <Compile Include="ISystem.cs" />
     <Compile Include="IComponent.cs" />
     <Compile Include="IEntity.cs" />
