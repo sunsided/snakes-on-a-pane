@@ -95,5 +95,14 @@ namespace GameWindow
             // HACK: in order to test the code, clicking into the frame invokes the render function
             Render();
         }
+
+        /// <summary>
+        /// Creates a buffer.
+        /// </summary>
+        /// <returns>Bitmap.</returns>
+        public Bitmap CreateBuffer()
+        {
+            return new Bitmap(ClientRectangle.Width, ClientRectangle.Height, _graphics);
+        }
     }
 }
