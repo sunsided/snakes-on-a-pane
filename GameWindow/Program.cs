@@ -24,6 +24,11 @@ namespace GameWindow
         private static ManualResetEventSlim _gameLoopStart = new ManualResetEventSlim(false);
 
         /// <summary>
+        /// Occurs when a frame should be rendered.
+        /// </summary>
+        private static event EventHandler RenderFrame;
+
+        /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
@@ -55,6 +60,10 @@ namespace GameWindow
                                 // ReSharper disable once MethodSupportsCancellation
                                 gameLoop.Wait();
                             };
+            RenderFrame += (sender, args) =>
+                           {
+                               form.RenderFrame();
+                           };
 
             // fire in the hole!
             Application.Run(form);
@@ -75,7 +84,10 @@ namespace GameWindow
             // loop until the game should be left
             while (!ct.IsCancellationRequested)
             {
-                
+                Thread.Sleep(1000/*ms per second*/ / 25 /*frames per second*/);
+
+                // render a frame
+                RenderFrame(null, EventArgs.Empty);
             }
         }
 
