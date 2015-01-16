@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.Remoting.Channels;
@@ -81,14 +82,25 @@ namespace GameWindow
             _gameLoopStart.Wait(ct);
             ct.ThrowIfCancellationRequested();
 
+            // prepare throughput measurement
+            var counter = 0;
+            var sw = Stopwatch.StartNew();
+
             // loop until the game should be left
             while (!ct.IsCancellationRequested)
             {
-                Thread.Sleep(1000/*ms per second*/ / 25 /*frames per second*/);
+                Thread.Sleep(1000/*ms per second*/ / 10 /*frames per second*/);
 
                 // render a frame
                 RenderFrame(null, EventArgs.Empty);
+
+                // count frames
+                ++counter;
             }
+
+            // calculate throughput
+            sw.Stop();
+            var throughput = (double) counter/sw.Elapsed.TotalSeconds;
         }
 
         /// <summary>
