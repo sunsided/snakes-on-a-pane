@@ -8,7 +8,7 @@ namespace GameLogic.Components
     ///     The color
     /// </para>
     /// </summary>
-    public struct ColorComponent : IComponent
+    public sealed class ColorComponent : IComponent
     {
         /// <summary>
         /// The color

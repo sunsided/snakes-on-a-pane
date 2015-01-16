@@ -6,7 +6,7 @@
     ///     Describes the position of an entity.
     /// </para>
     /// </summary>
-    public struct PositionComponent : IComponent
+    public sealed class PositionComponent : IComponent
     {
         /// <summary>
         /// The x position
