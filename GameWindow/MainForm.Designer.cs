@@ -33,14 +33,16 @@ namespace GameWindow
         /// </summary>
         private void InitializeComponent()
         {
-            this.renderTarget1 = new RenderTarget();
+            this.renderTarget1 = new GameWindow.Rendering.RenderTarget();
             this.SuspendLayout();
             // 
             // renderTarget1
             // 
             this.renderTarget1.Location = new System.Drawing.Point(12, 12);
+            this.renderTarget1.MaximumSize = new System.Drawing.Size(640, 480);
+            this.renderTarget1.MinimumSize = new System.Drawing.Size(640, 480);
             this.renderTarget1.Name = "renderTarget1";
-            this.renderTarget1.Size = new System.Drawing.Size(641, 481);
+            this.renderTarget1.Size = new System.Drawing.Size(640, 480);
             this.renderTarget1.TabIndex = 0;
             // 
             // MainForm
@@ -50,6 +52,7 @@ namespace GameWindow
             this.ClientSize = new System.Drawing.Size(667, 505);
             this.Controls.Add(this.renderTarget1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";
