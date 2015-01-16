@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
@@ -39,7 +41,12 @@ namespace GameWindow
             const ControlStyles disableStyles = ControlStyles.UserPaint; // disables all external Paint(args) calls
             SetStyle(disableStyles, false);
 
-            _graphics = CreateGraphics();
+            var gr = _graphics = CreateGraphics();
+            gr.InterpolationMode = InterpolationMode.Low;
+            gr.CompositingQuality = CompositingQuality.HighSpeed;
+            gr.SmoothingMode = SmoothingMode.HighSpeed;
+            gr.TextRenderingHint = TextRenderingHint.SystemDefault;
+            gr.PixelOffsetMode = PixelOffsetMode.HighSpeed;
         }
         
         /// <summary>
