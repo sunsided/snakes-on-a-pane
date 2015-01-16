@@ -56,10 +56,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RenderTarget.cs">
+    <Compile Include="Rendering\RenderTarget.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="RenderTarget.Designer.cs">
+    <Compile Include="Rendering\RenderTarget.Designer.cs">
       <DependentUpon>RenderTarget.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="MainForm.resx">
@@ -74,7 +74,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="RenderTarget.resx">
+    <EmbeddedResource Include="Rendering\RenderTarget.resx">
       <DependentUpon>RenderTarget.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

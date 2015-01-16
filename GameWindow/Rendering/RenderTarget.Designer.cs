@@ -1,5 +1,8 @@
-﻿namespace GameWindow
+﻿namespace GameWindow.Rendering
 {
+    /// <summary>
+    /// Class RenderTarget.
+    /// </summary>
     partial class RenderTarget
     {
         /// <summary> 

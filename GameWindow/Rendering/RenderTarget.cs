@@ -6,12 +6,12 @@ using System.Threading;
 using System.Windows.Forms;
 using JetBrains.Annotations;
 
-namespace GameWindow
+namespace GameWindow.Rendering
 {
     /// <summary>
     /// Class RenderTarget.
     /// </summary>
-    public partial class RenderTarget : UserControl
+    public sealed partial class RenderTarget : UserControl
     {
         /// <summary>
         /// Gets the graphics.
@@ -90,7 +90,7 @@ namespace GameWindow
 
             gr.DrawString(frame.ToString(CultureInfo.InvariantCulture), DefaultFont, new SolidBrush(Color.GreenYellow), 0, 0);
         }
-
+        
         /// <summary>
         /// Creates a buffer.
         /// </summary>
