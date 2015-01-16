@@ -23,9 +23,9 @@ namespace GameWindow
         private static ManualResetEventSlim _gameLoopStart = new ManualResetEventSlim(false);
 
         /// <summary>
-        /// Occurs when a frame should be rendered.
+        /// The renderer
         /// </summary>
-        private static event EventHandler RenderFrame;
+        private static IRenderer _renderer;
 
         /// <summary>
         /// The main entry point for the application.
@@ -43,8 +43,12 @@ namespace GameWindow
             // initializes the game loop task
             var gameLoop = Task.Factory.StartNew(GameLoop, cts.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
 
-            // create the buffer factory
+            // create the buffer manager
             var bufferManager = new BufferManager(bufferCount:2);
+
+            // create the renderer
+            var renderer = new Renderer(bufferManager);
+            _renderer = renderer;
 
             // prepares the window rendering
             Application.EnableVisualStyles();
@@ -57,6 +61,11 @@ namespace GameWindow
                                            Trace.TraceInformation("Initializing buffer manager.");
                                            bufferManager.Initialize(args.Factory);
                                        };
+            form.BlitReady += (sender, args) =>
+                              {
+                                  Trace.TraceInformation("Initializing renderer.");
+                                  renderer.Initialize(args.Blit);
+                              };
             form.Shown += (sender, args) =>
                           {
                               Trace.TraceInformation("Unlocking game loop.");
@@ -69,10 +78,6 @@ namespace GameWindow
                                 // ReSharper disable once MethodSupportsCancellation
                                 gameLoop.Wait();
                             };
-            RenderFrame += (sender, args) =>
-                           {
-                               form.RenderFrame();
-                           };
 
             // fire in the hole!
             Application.Run(form);
@@ -90,6 +95,9 @@ namespace GameWindow
             _gameLoopStart.Wait(ct);
             ct.ThrowIfCancellationRequested();
 
+            // fetch the renderer
+            var renderer = _renderer;
+
             // prepare throughput measurement
             var counter = 0;
             var sw = Stopwatch.StartNew();
@@ -100,7 +108,7 @@ namespace GameWindow
                 Thread.Sleep(1000/*ms per second*/ / 10 /*frames per second*/);
 
                 // render a frame
-                RenderFrame(null, EventArgs.Empty);
+                renderer.Render();
 
                 // count frames
                 ++counter;

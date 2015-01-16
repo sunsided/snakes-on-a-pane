@@ -15,6 +15,11 @@ namespace GameWindow
         public event EventHandler<BufferFactoryEventArgs> BufferFactoryReady;
 
         /// <summary>
+        /// Occurs when the blit instance is ready.
+        /// </summary>
+        public event EventHandler<BlitEventArgs> BlitReady;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="MainForm"/> class.
         /// </summary>
         public MainForm()
@@ -28,6 +33,7 @@ namespace GameWindow
         /// <param name="e">A <see cref="T:System.EventArgs" /> that contains the event data.</param>
         protected override void OnShown(EventArgs e)
         {
+            OnBlitReady(new BlitEventArgs(renderTarget1));
             OnBufferFactoryReady(new BufferFactoryEventArgs(renderTarget1));
             base.OnShown(e);
         }
@@ -47,6 +53,16 @@ namespace GameWindow
         protected virtual void OnBufferFactoryReady(BufferFactoryEventArgs e)
         {
             var handler = BufferFactoryReady;
+            if (handler != null) handler(this, e);
+        }
+
+        /// <summary>
+        /// Handles the <see cref="E:BlitReady" /> event.
+        /// </summary>
+        /// <param name="e">The <see cref="BlitEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnBlitReady(BlitEventArgs e)
+        {
+            var handler = BlitReady;
             if (handler != null) handler(this, e);
         }
     }
