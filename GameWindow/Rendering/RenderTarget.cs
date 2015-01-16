@@ -50,6 +50,7 @@ namespace GameWindow.Rendering
             gr.SmoothingMode = SmoothingMode.HighSpeed;
             gr.TextRenderingHint = TextRenderingHint.SystemDefault;
             gr.PixelOffsetMode = PixelOffsetMode.HighSpeed;
+            gr.SetClip(ClientRectangle);
         }
         
         /// <summary>
@@ -104,7 +105,7 @@ namespace GameWindow.Rendering
             if (ReferenceEquals(buffer, null)) throw new ArgumentNullException("buffer", "The buffer passed to the Blit function must not be null");
 
             var gr = _graphics;
-            gr.DrawImageUnscaled(buffer, ClientRectangle);
+            gr.DrawImageUnscaledAndClipped(buffer, ClientRectangle);
         }
 
         /// <summary>
