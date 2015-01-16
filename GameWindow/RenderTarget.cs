@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
 using JetBrains.Annotations;
 
@@ -16,6 +19,11 @@ namespace GameWindow
         /// <value>The graphics.</value>
         [NotNull]
         private readonly Graphics _graphics;
+
+        /// <summary>
+        /// The frame being rendered
+        /// </summary>
+        private int _frame = 0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RenderTarget"/> class.
@@ -72,6 +80,10 @@ namespace GameWindow
             {
                 gr.DrawLine(pen, x, 0, x, height);
             }
+
+            var frame = Interlocked.Increment(ref _frame);
+
+            gr.DrawString(frame.ToString(CultureInfo.InvariantCulture), DefaultFont, new SolidBrush(Color.GreenYellow), 0, 0);
         }
 
         /// <summary>
