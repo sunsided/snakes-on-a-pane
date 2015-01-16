@@ -1,12 +1,12 @@
 ﻿namespace GameLogic.Components
 {
     /// <summary>
-    /// Struct AABB
+    /// Struct AABBComponent
     /// <para>
     ///     Axis-aligned bounding box of the entity
     /// </para>
     /// </summary>
-    struct AABB : IComponent
+    struct AABBComponent : IComponent
     {
         /// <summary>
         /// The box width
