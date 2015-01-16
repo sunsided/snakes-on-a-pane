@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.Remoting.Channels;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameLogic.Components;
 using GameLogic.Entities;
+using GameWindow.Rendering;
 
 namespace GameWindow
 {
@@ -45,18 +43,28 @@ namespace GameWindow
             // initializes the game loop task
             var gameLoop = Task.Factory.StartNew(GameLoop, cts.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
 
+            // create the buffer factory
+            var bufferManager = new BufferManager(bufferCount:2);
+
             // prepares the window rendering
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             // create the form and hook into the events
             var form = new MainForm();
+            form.BufferFactoryReady += (sender, args) =>
+                                       {
+                                           Trace.TraceInformation("Initializing buffer manager.");
+                                           bufferManager.Initialize(args.Factory);
+                                       };
             form.Shown += (sender, args) =>
                           {
+                              Trace.TraceInformation("Unlocking game loop.");
                               _gameLoopStart.Set();
                           };
             form.Closing += (sender, args) =>
                             {
+                                Trace.TraceInformation("Canceling game loop.");
                                 cts.Cancel();
                                 // ReSharper disable once MethodSupportsCancellation
                                 gameLoop.Wait();
