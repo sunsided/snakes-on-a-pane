@@ -11,11 +11,11 @@
         /// <summary>
         /// The x position
         /// </summary>
-        public int X;
+        public float X;
 
         /// <summary>
         /// The y position
         /// </summary>
-        public int Y;
+        public float Y;
     }
 }
