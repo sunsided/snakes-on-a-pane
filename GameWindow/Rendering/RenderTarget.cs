@@ -59,40 +59,7 @@ namespace GameWindow.Rendering
         /// <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data.</param>
         protected override void OnPaint(PaintEventArgs e)
         {
-            // will never be called
-        }
-
-        /// <summary>
-        /// Paints this instance.
-        /// </summary>
-        public void Render()
-        {
-            var gr = _graphics;
-
-            const int gridWidth = 10;
-
-            var left = ClientRectangle.Left;
-            var top = ClientRectangle.Top;
-            var width = ClientRectangle.Width;
-            var height = ClientRectangle.Height;
-
-            var pen = new Pen(Color.FromArgb(10, 10, 10));
-
-            gr.Clear(Color.Red);
-
-            for (var y = top; y <= height; y += gridWidth)
-            {
-                gr.DrawLine(pen, 0, y, width, y);
-            }
-
-            for (var x = left; x <= width; x += gridWidth)
-            {
-                gr.DrawLine(pen, x, 0, x, height);
-            }
-
-            var frame = Interlocked.Increment(ref _frame);
-
-            gr.DrawString(frame.ToString(CultureInfo.InvariantCulture), DefaultFont, new SolidBrush(Color.GreenYellow), 0, 0);
+            throw new InvalidOperationException("This event should never raise.");
         }
 
         /// <summary>

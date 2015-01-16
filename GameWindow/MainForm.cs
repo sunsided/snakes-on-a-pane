@@ -37,15 +37,7 @@ namespace GameWindow
             OnBufferFactoryReady(new BufferFactoryEventArgs(renderTarget1));
             base.OnShown(e);
         }
-
-        /// <summary>
-        /// Renders the frame.
-        /// </summary>
-        public void RenderFrame()
-        {
-            renderTarget1.Render();
-        }
-
+        
         /// <summary>
         /// Handles the <see cref="E:BufferFactoryReady" /> event.
         /// </summary>
