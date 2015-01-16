@@ -2,8 +2,6 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using System.Globalization;
-using System.Threading;
 using System.Windows.Forms;
 using JetBrains.Annotations;
 
@@ -20,12 +18,7 @@ namespace GameWindow.Rendering
         /// <value>The graphics.</value>
         [NotNull]
         private readonly Graphics _graphics;
-
-        /// <summary>
-        /// The frame being rendered
-        /// </summary>
-        private int _frame = 0;
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="RenderTarget"/> class.
         /// </summary>
