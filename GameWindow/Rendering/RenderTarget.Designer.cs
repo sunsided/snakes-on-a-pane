@@ -1,5 +1,8 @@
-﻿namespace GameWindow
+﻿namespace GameWindow.Rendering
 {
+    /// <summary>
+    /// Class RenderTarget.
+    /// </summary>
     partial class RenderTarget
     {
         /// <summary> 
@@ -34,6 +37,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.MaximumSize = new System.Drawing.Size(640, 480);
+            this.MinimumSize = new System.Drawing.Size(640, 480);
             this.Name = "RenderTarget";
             this.Size = new System.Drawing.Size(640, 480);
             this.ResumeLayout(false);

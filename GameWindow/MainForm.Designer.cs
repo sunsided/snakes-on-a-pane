@@ -1,5 +1,10 @@
-﻿namespace GameWindow
+﻿using GameWindow.Rendering;
+
+namespace GameWindow
 {
+    /// <summary>
+    /// Class MainForm.
+    /// </summary>
     partial class MainForm
     {
         /// <summary>
@@ -28,7 +33,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.renderTarget1 = new GameWindow.RenderTarget();
+            this.renderTarget1 = new RenderTarget();
             this.SuspendLayout();
             // 
             // renderTarget1
