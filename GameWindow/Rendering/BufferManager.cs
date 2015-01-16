@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using JetBrains.Annotations;
@@ -69,11 +70,35 @@ namespace GameWindow.Rendering
             for (var i = 0; i < bufferCount; ++i)
             {
                 var buffer = buffers[i] = bufferFactory.CreateBuffer();
-                graphics[i] = Graphics.FromImage(buffer);
+                var gr = graphics[i] = Graphics.FromImage(buffer);
+                AugmentForDebugging(gr);
             }
 
             // flag as initialized
             Interlocked.Increment(ref _initializedFlag);
+        }
+
+        /// <summary>
+        /// The randomizer used for debugging
+        /// </summary>
+        private readonly Random _random = new Random();
+
+        /// <summary>
+        /// Augments the graphics instance for debugging.
+        /// </summary>
+        /// <param name="gr">The graphics.</param>
+        /// <exception cref="System.ArgumentNullException">Graphics instance must not be null</exception>
+        [Conditional("DEBUG")]
+        private void AugmentForDebugging([NotNull] Graphics gr)
+        {
+            if (ReferenceEquals(gr, null)) throw new ArgumentNullException("gr", "Graphics instance must not be null");
+
+            var red = _random.Next(0, 256);
+            var green = _random.Next(0, 256);
+            var blue = _random.Next(0, 256);
+
+            var color = Color.FromArgb(red, green, blue);
+            gr.Clear(color);
         }
 
         /// <summary>
