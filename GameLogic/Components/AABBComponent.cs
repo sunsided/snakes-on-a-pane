@@ -6,7 +6,7 @@
     ///     Axis-aligned bounding box of the entity
     /// </para>
     /// </summary>
-    struct AABBComponent : IComponent
+    public struct AABBComponent : IComponent
     {
         /// <summary>
         /// The box width

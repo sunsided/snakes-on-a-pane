@@ -43,8 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\Color.cs" />
-    <Compile Include="Components\AABB.cs" />
+    <Compile Include="Components\ColorComponent.cs" />
+    <Compile Include="Components\AABBComponent.cs" />
     <Compile Include="Components\PositionComponent.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="ISystem.cs" />
