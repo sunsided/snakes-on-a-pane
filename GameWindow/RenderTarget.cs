@@ -1,6 +1,6 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
@@ -41,7 +41,12 @@ namespace GameWindow
             const ControlStyles disableStyles = ControlStyles.UserPaint; // disables all external Paint(args) calls
             SetStyle(disableStyles, false);
 
-            _graphics = CreateGraphics();
+            var gr = _graphics = CreateGraphics();
+            gr.InterpolationMode = InterpolationMode.Low;
+            gr.CompositingQuality = CompositingQuality.HighSpeed;
+            gr.SmoothingMode = SmoothingMode.HighSpeed;
+            gr.TextRenderingHint = TextRenderingHint.SystemDefault;
+            gr.PixelOffsetMode = PixelOffsetMode.HighSpeed;
         }
         
         /// <summary>
@@ -87,16 +92,6 @@ namespace GameWindow
         }
 
         /// <summary>
-        /// Raises the <see cref="E:System.Windows.Forms.Control.Click" /> event.
-        /// </summary>
-        /// <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
-        protected override void OnClick(EventArgs e)
-        {
-            // HACK: in order to test the code, clicking into the frame invokes the render function
-            Render();
-        }
-
-        /// <summary>
         /// Creates a buffer.
         /// </summary>
         /// <returns>Bitmap.</returns>
@@ -104,5 +99,5 @@ namespace GameWindow
         {
             return new Bitmap(ClientRectangle.Width, ClientRectangle.Height, _graphics);
         }
-    }
+	}
 }

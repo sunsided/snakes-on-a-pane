@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameLogic.Components;
@@ -12,16 +15,93 @@ namespace GameWindow
     static class Program
     {
         /// <summary>
+        /// The cancellation token used to leave the game loop
+        /// </summary>
+        private static CancellationToken _gameLoopCancellationToken;
+
+        /// <summary>
+        /// The game loop start event
+        /// </summary>
+        private static ManualResetEventSlim _gameLoopStart = new ManualResetEventSlim(false);
+
+        /// <summary>
+        /// Occurs when a frame should be rendered.
+        /// </summary>
+        private static event EventHandler RenderFrame;
+
+        /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
+            // initializes the game world
             CreateGame();
 
+            // cancellation tokens for game shutdown
+            var cts = new CancellationTokenSource();
+            _gameLoopCancellationToken = cts.Token;
+
+            // initializes the game loop task
+            var gameLoop = Task.Factory.StartNew(GameLoop, cts.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+
+            // prepares the window rendering
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+
+            // create the form and hook into the events
+            var form = new MainForm();
+            form.Shown += (sender, args) =>
+                          {
+                              _gameLoopStart.Set();
+                          };
+            form.Closing += (sender, args) =>
+                            {
+                                cts.Cancel();
+                                // ReSharper disable once MethodSupportsCancellation
+                                gameLoop.Wait();
+                            };
+            RenderFrame += (sender, args) =>
+                           {
+                               form.RenderFrame();
+                           };
+
+            // fire in the hole!
+            Application.Run(form);
+        }
+
+        /// <summary>
+        /// The game loop
+        /// </summary>
+        private static void GameLoop()
+        {
+            var ct = _gameLoopCancellationToken;
+            
+            // wait for the game loop to start or
+            // for the game to exit
+            _gameLoopStart.Wait(ct);
+            ct.ThrowIfCancellationRequested();
+
+            // prepare throughput measurement
+            var counter = 0;
+            var sw = Stopwatch.StartNew();
+
+            // loop until the game should be left
+            while (!ct.IsCancellationRequested)
+            {
+                Thread.Sleep(1000/*ms per second*/ / 10 /*frames per second*/);
+
+                // render a frame
+                RenderFrame(null, EventArgs.Empty);
+
+                // count frames
+                ++counter;
+            }
+
+            // calculate throughput
+            sw.Stop();
+            var throughput = counter/sw.Elapsed.TotalSeconds;
+            Trace.TraceInformation("Game Loop throughput: {0} loops per second", throughput);
         }
 
         /// <summary>
