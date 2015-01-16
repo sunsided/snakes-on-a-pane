@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 
 namespace GameWindow
 {
@@ -16,32 +11,49 @@ namespace GameWindow
     public partial class RenderTarget : UserControl
     {
         /// <summary>
+        /// Gets the graphics.
+        /// </summary>
+        /// <value>The graphics.</value>
+        [NotNull]
+        private readonly Graphics _graphics;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="RenderTarget"/> class.
         /// </summary>
         public RenderTarget()
         {
             InitializeComponent();
 
-            const ControlStyles styles = ControlStyles.Opaque
-                                         | ControlStyles.OptimizedDoubleBuffer
-                                         | ControlStyles.AllPaintingInWmPaint
-                                         | ControlStyles.DoubleBuffer
-                                         | ControlStyles.UserPaint;
-            SetStyle(styles, true);
-        }
+            const ControlStyles enableStyles = ControlStyles.Opaque
+                                               | ControlStyles.OptimizedDoubleBuffer
+                                               | ControlStyles.DoubleBuffer
+                                               | ControlStyles.AllPaintingInWmPaint; // moves all paint events to Paint(args)
+            SetStyle(enableStyles, true);
 
+            const ControlStyles disableStyles = ControlStyles.UserPaint; // disables all external Paint(args) calls
+            SetStyle(disableStyles, false);
+
+            _graphics = CreateGraphics();
+        }
+        
         /// <summary>
         /// Raises the <see cref="E:System.Windows.Forms.Control.Paint" /> event.
         /// </summary>
         /// <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data.</param>
         protected override void OnPaint(PaintEventArgs e)
         {
-            // base.OnPaint(e);
+            // will never be called
+        }
 
-            var gr = e.Graphics;
-            
+        /// <summary>
+        /// Paints this instance.
+        /// </summary>
+        public void Render()
+        {
+            var gr = _graphics;
+
             const int gridWidth = 10;
-            
+
             var left = ClientRectangle.Left;
             var top = ClientRectangle.Top;
             var width = ClientRectangle.Width;
@@ -49,7 +61,7 @@ namespace GameWindow
 
             var pen = new Pen(Color.FromArgb(10, 10, 10));
 
-            gr.Clear(Color.Black);
+            gr.Clear(Color.Red);
 
             for (var y = top; y <= height; y += gridWidth)
             {
@@ -60,6 +72,16 @@ namespace GameWindow
             {
                 gr.DrawLine(pen, x, 0, x, height);
             }
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:System.Windows.Forms.Control.Click" /> event.
+        /// </summary>
+        /// <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+        protected override void OnClick(EventArgs e)
+        {
+            // HACK: in order to test the code, clicking into the frame invokes the render function
+            Render();
         }
     }
 }
