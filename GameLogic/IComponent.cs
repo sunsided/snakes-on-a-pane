@@ -3,7 +3,7 @@
     /// <summary>
     /// Interface IComponent
     /// <para>
-    ///     Tags a component that is used by an <see cref="IEntity"/> instance and processed by a <see cref="ISystem"/>.
+    ///     Tags a component that describes the state of an aspect of an <see cref="IEntity"/>, which is processed by an <see cref="ISystem"/>.
     /// </para>
     /// </summary>
     public interface IComponent
