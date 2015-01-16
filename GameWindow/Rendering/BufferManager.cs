@@ -125,7 +125,7 @@ namespace GameWindow.Rendering
             // if the buffer index is at the last position,
             // wrap it around to zero
             var lastIndex = _bufferCount - 1;
-            var originalIndex = Interlocked.CompareExchange(ref _currentBuffer, lastIndex, 0);
+            var originalIndex = Interlocked.CompareExchange(ref _currentBuffer, value: 0, comparand: lastIndex);
 
             // if the index value was not equal to the last index,
             // then the exchange operation did not take place and we can increment
