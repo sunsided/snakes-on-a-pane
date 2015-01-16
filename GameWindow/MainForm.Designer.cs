@@ -33,22 +33,24 @@ namespace GameWindow
         /// </summary>
         private void InitializeComponent()
         {
-            this.renderTarget1 = new RenderTarget();
+            this.renderTarget = new GameWindow.Rendering.RenderTarget();
             this.SuspendLayout();
             // 
-            // renderTarget1
+            // renderTarget
             // 
-            this.renderTarget1.Location = new System.Drawing.Point(12, 12);
-            this.renderTarget1.Name = "renderTarget1";
-            this.renderTarget1.Size = new System.Drawing.Size(641, 481);
-            this.renderTarget1.TabIndex = 0;
+            this.renderTarget.Location = new System.Drawing.Point(12, 12);
+            this.renderTarget.MaximumSize = new System.Drawing.Size(640, 480);
+            this.renderTarget.MinimumSize = new System.Drawing.Size(640, 480);
+            this.renderTarget.Name = "renderTarget";
+            this.renderTarget.Size = new System.Drawing.Size(640, 480);
+            this.renderTarget.TabIndex = 0;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(667, 505);
-            this.Controls.Add(this.renderTarget1);
+            this.Controls.Add(this.renderTarget);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -60,7 +62,7 @@ namespace GameWindow
 
         #endregion
 
-        private RenderTarget renderTarget1;
+        private RenderTarget renderTarget;
     }
 }
 

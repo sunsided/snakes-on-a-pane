@@ -33,8 +33,8 @@ namespace GameWindow
         /// <param name="e">A <see cref="T:System.EventArgs" /> that contains the event data.</param>
         protected override void OnShown(EventArgs e)
         {
-            OnBlitReady(new BlitEventArgs(renderTarget1));
-            OnBufferFactoryReady(new BufferFactoryEventArgs(renderTarget1));
+            OnBlitReady(new BlitEventArgs(renderTarget));
+            OnBufferFactoryReady(new BufferFactoryEventArgs(renderTarget));
             base.OnShown(e);
         }
         
