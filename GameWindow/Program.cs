@@ -100,7 +100,8 @@ namespace GameWindow
 
             // calculate throughput
             sw.Stop();
-            var throughput = (double) counter/sw.Elapsed.TotalSeconds;
+            var throughput = counter/sw.Elapsed.TotalSeconds;
+            Trace.TraceInformation("Game Loop throughput: {0} loops per second", throughput);
         }
 
         /// <summary>
