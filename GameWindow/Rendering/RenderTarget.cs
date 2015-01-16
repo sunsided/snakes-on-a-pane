@@ -9,9 +9,9 @@ using JetBrains.Annotations;
 namespace GameWindow.Rendering
 {
     /// <summary>
-    /// Class RenderTarget.
+    /// Class RenderTarget. This class cannot be inherited.
     /// </summary>
-    public sealed partial class RenderTarget : UserControl
+    public sealed partial class RenderTarget : UserControl, IBufferFactory
     {
         /// <summary>
         /// Gets the graphics.
