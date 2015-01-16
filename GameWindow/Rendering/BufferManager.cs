@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.Threading;
 using JetBrains.Annotations;
 
@@ -70,12 +72,32 @@ namespace GameWindow.Rendering
             for (var i = 0; i < bufferCount; ++i)
             {
                 var buffer = buffers[i] = bufferFactory.CreateBuffer();
-                var gr = graphics[i] = Graphics.FromImage(buffer);
-                AugmentForDebugging(gr);
+                graphics[i] = CreateGraphics(buffer);
             }
 
             // flag as initialized
             Interlocked.Increment(ref _initializedFlag);
+        }
+
+        /// <summary>
+        /// Creates the graphics.
+        /// </summary>
+        /// <param name="buffer">The buffer.</param>
+        /// <returns>Graphics.</returns>
+        [NotNull]
+        private Graphics CreateGraphics([NotNull] Bitmap buffer)
+        {
+            if (ReferenceEquals(buffer, null)) throw new ArgumentNullException("buffer", "Buffer must not be null");
+
+            var gr = Graphics.FromImage(buffer);
+            gr.InterpolationMode = InterpolationMode.Low;
+            gr.CompositingQuality = CompositingQuality.HighSpeed;
+            gr.SmoothingMode = SmoothingMode.HighSpeed;
+            gr.TextRenderingHint = TextRenderingHint.SystemDefault;
+            gr.PixelOffsetMode = PixelOffsetMode.HighSpeed;
+            
+            AugmentForDebugging(gr);
+            return gr;
         }
 
         /// <summary>
