@@ -38,6 +38,13 @@ namespace GameWindow
             star.AddComponent(new PositionComponent { X = 7F, Y = 7F });
             star.AddComponent(new ColorComponent { Color = Color.White });
             star.AddComponent(new AABBComponent { Width = 0.5F, Height = 0.5F });
+            star.AddComponent(new ParallaxComponent { Distance = 1 });
+
+            var star2 = new Entity();
+            star2.AddComponent(new PositionComponent { X = 7F, Y = 7F });
+            star2.AddComponent(new ColorComponent { Color = Color.White });
+            star2.AddComponent(new AABBComponent { Width = 0.5F, Height = 0.5F });
+            star2.AddComponent(new ParallaxComponent { Distance = 10 });
         }
     }
 }
