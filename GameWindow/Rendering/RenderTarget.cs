@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Globalization;
@@ -11,7 +12,7 @@ namespace GameWindow.Rendering
     /// <summary>
     /// Class RenderTarget. This class cannot be inherited.
     /// </summary>
-    public sealed partial class RenderTarget : UserControl, IBufferFactory
+    public sealed partial class RenderTarget : UserControl, IBufferFactory, IBlit
     {
         /// <summary>
         /// Gets the graphics.
@@ -90,7 +91,20 @@ namespace GameWindow.Rendering
 
             gr.DrawString(frame.ToString(CultureInfo.InvariantCulture), DefaultFont, new SolidBrush(Color.GreenYellow), 0, 0);
         }
-        
+
+        /// <summary>
+        /// Blits the specified bitmap onto the render target
+        /// </summary>
+        /// <param name="buffer">The buffer.</param>
+        /// <exception cref="System.ArgumentNullException">The buffer passed to the Blit function must not be null</exception>
+        public void Blit([NotNull] Bitmap buffer)
+        {
+            if (ReferenceEquals(buffer, null)) throw new ArgumentNullException("buffer", "The buffer passed to the Blit function must not be null");
+
+            var gr = _graphics;
+            gr.DrawImageUnscaled(buffer, ClientRectangle);
+        }
+
         /// <summary>
         /// Creates a buffer.
         /// </summary>

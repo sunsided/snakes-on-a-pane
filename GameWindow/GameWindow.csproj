@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\BufferFactoryEventArgs.cs" />
     <Compile Include="Rendering\BufferManager.cs" />
+    <Compile Include="Rendering\IBlit.cs" />
     <Compile Include="Rendering\IBufferFactory.cs" />
     <Compile Include="Rendering\RenderTarget.cs">
       <SubType>UserControl</SubType>
