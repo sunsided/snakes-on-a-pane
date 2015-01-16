@@ -34,6 +34,8 @@ namespace GameWindow.Rendering
             InitializeComponent();
 
             const ControlStyles enableStyles = ControlStyles.Opaque
+                                               | ControlStyles.FixedHeight
+                                               | ControlStyles.FixedWidth
                                                | ControlStyles.OptimizedDoubleBuffer
                                                | ControlStyles.DoubleBuffer
                                                | ControlStyles.AllPaintingInWmPaint; // moves all paint events to Paint(args)
