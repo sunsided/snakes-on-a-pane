@@ -98,14 +98,14 @@ namespace GameWindow.Systems
         /// <summary>
         /// Initializes a new instance of the <see cref="InputSystem"/> class.
         /// </summary>
-        /// <param name="form">The form.</param>
+        /// <param name="control">The form.</param>
         /// <exception cref="System.ArgumentNullException">The form must not be null</exception>
-        public InputSystem([NotNull] Form form)
+        public InputSystem([NotNull] Control control)
         {
-            if (ReferenceEquals(form, null)) throw new ArgumentNullException("form", "The form must not be null");
+            if (ReferenceEquals(control, null)) throw new ArgumentNullException("control", "The control must not be null");
 
-            form.KeyDown += FormKeyDown;
-            form.KeyUp += FormKeyUp;
+            control.KeyDown += FormKeyDown;
+            control.KeyUp += FormKeyUp;
         }
 
         /// <summary>
