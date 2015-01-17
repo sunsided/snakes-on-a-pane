@@ -178,5 +178,14 @@ namespace GameLogic.Systems
                 e.Handled = false;
             }
         }
+
+        /// <summary>
+        /// Processes the specified entity.
+        /// </summary>
+        /// <param name="entity">The entity.</param>
+        public void Process(IEntity entity)
+        {
+            if (ReferenceEquals(entity, null)) throw new ArgumentNullException("entity", "The given entity must not be null");
+        }
     }
 }
