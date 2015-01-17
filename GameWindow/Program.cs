@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using GameLogic.Components;
 using GameLogic.Entities;
 using GameWindow.Rendering;
+using GameWindow.Systems;
 
 namespace GameWindow
 {
@@ -79,6 +80,9 @@ namespace GameWindow
                                 gameLoop.Wait();
                             };
 
+            // create the input system
+            var inputSystem = new InputSystem(form);
+
             // fire in the hole!
             Application.Run(form);
         }
@@ -129,6 +133,7 @@ namespace GameWindow
             player.AddComponent(new PositionComponent { X = 0F, Y = 0F });
             player.AddComponent(new ColorComponent { Color = Color.DarkGreen });
             player.AddComponent(new AABBComponent { Width = 5F, Height = 5F });
+            player.AddComponent(new InputComponent());
 
             var star = new Entity();
             star.AddComponent(new PositionComponent { X = 7F, Y = 7F });

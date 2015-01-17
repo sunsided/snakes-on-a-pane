@@ -52,6 +52,7 @@ namespace GameWindow
             this.ClientSize = new System.Drawing.Size(667, 505);
             this.Controls.Add(this.renderTarget);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";

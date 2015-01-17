@@ -36,6 +36,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Components\ColorComponent.cs" />
     <Compile Include="Components\AABBComponent.cs" />
+    <Compile Include="Components\InputComponent.cs" />
     <Compile Include="Components\ParallaxDistance.cs" />
     <Compile Include="Components\PositionComponent.cs" />
     <Compile Include="Entities\Entity.cs" />
@@ -52,6 +54,8 @@
     <Compile Include="IComponent.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Systems\InputSystem.cs" />
+    <Compile Include="Systems\KeyState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
