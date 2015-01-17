@@ -96,6 +96,7 @@ namespace GameWindow
 
             systems.AddSystem(new InputSystem(form));
             systems.AddSystem(new VelocitySystem());
+            systems.AddSystem(new DirectionChangeDetectionSystem());
             systems.AddSystem(new PositionSystem());
             systems.AddSystem(new SnakeRenderSystem(bufferManager));
 
