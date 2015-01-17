@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GameLogic.Entities;
 using JetBrains.Annotations;
 
 namespace GameLogic
@@ -15,16 +16,15 @@ namespace GameLogic
         private readonly List<IEntity> _entities = new List<IEntity>();
 
         /// <summary>
-        /// Adds the system.
+        /// Creates and adds an entity.
         /// </summary>
-        /// <param name="entity">The entity.</param>
-        /// <returns>SystemManager.</returns>
-        public EntityManager AddEntity([NotNull] IEntity entity)
+        /// <returns>Entity.</returns>
+        [NotNull]
+        public Entity CreateEntity()
         {
-            if (ReferenceEquals(entity, null)) throw new ArgumentNullException("entity", "Entity must not be null");
-
+            var entity = new Entity();
             _entities.Add(entity);
-            return this;
+            return entity;
         }
 
         /// <summary>
