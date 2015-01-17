@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using GameLogic;
 using JetBrains.Annotations;
@@ -120,18 +121,22 @@ namespace GameWindow.Systems
             if (key == PlayerNorthKey)
             {
                 _playerNorth = KeyState.Unpressed;
+                Trace.WriteLine("North key up");
             }
             else if (key == PlayerSouthKey)
             {
                 _playerSouth = KeyState.Unpressed;
+                Trace.WriteLine("South key up");
             }
             else if (key == PlayerWestKey)
             {
                 _playerWest = KeyState.Unpressed;
+                Trace.WriteLine("West key up");
             }
             else if (key == PlayerEastKey)
             {
                 _playerEast = KeyState.Unpressed;
+                Trace.WriteLine("East key up");
             }
             else
             {
@@ -152,18 +157,22 @@ namespace GameWindow.Systems
             if (key == PlayerNorthKey)
             {
                 _playerNorth = KeyState.Pressed;
+                Trace.WriteLine("North key down");
             }
             else if (key == PlayerSouthKey)
             {
                 _playerSouth = KeyState.Pressed;
+                Trace.WriteLine("South key down");
             }
             else if (key == PlayerWestKey)
             {
                 _playerWest = KeyState.Pressed;
+                Trace.WriteLine("West key down");
             }
             else if (key == PlayerEastKey)
             {
                 _playerEast = KeyState.Pressed;
+                Trace.WriteLine("East key down");
             }
             else
             {
