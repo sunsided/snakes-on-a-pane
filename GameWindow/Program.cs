@@ -94,11 +94,11 @@ namespace GameWindow
             var systems = new SystemManager();
             _systems = systems;
 
-            systems.AddSystem(new InputSystem(form));
-            systems.AddSystem(new VelocitySystem());
-            systems.AddSystem(new DirectionChangeDetectionSystem());
-            systems.AddSystem(new PositionSystem());
-            systems.AddSystem(new SnakeRenderSystem(bufferManager));
+            systems.AddSystem(new InputSystem(form))
+                .AddSystem(new VelocitySystem())
+                .AddSystem(new DirectionChangeDetectionSystem())
+                .AddSystem(new PositionSystem())
+                .AddSystem(new SnakeRenderSystem(bufferManager));
 
             // fire in the hole!
             Application.Run(form);
