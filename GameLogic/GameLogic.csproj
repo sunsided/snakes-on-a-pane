@@ -62,6 +62,7 @@
     <Compile Include="SystemManager.cs" />
     <Compile Include="Systems\InputSystem.cs" />
     <Compile Include="Systems\KeyState.cs" />
+    <Compile Include="Systems\PreRenderSystem.cs" />
     <Compile Include="Systems\RenderSystem.cs" />
     <Compile Include="Systems\PositionSystem.cs" />
     <Compile Include="Systems\VelocitySystem.cs" />
