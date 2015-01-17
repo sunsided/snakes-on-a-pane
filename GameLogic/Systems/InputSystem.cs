@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using GameLogic.Components;
 using JetBrains.Annotations;
 
 namespace GameLogic.Systems
@@ -186,6 +187,17 @@ namespace GameLogic.Systems
         public void Process(IEntity entity)
         {
             if (ReferenceEquals(entity, null)) throw new ArgumentNullException("entity", "The given entity must not be null");
+
+            // fetch the input component
+            InputComponent input;
+            if (!entity.TryGetComponent(out input)) return;
+            Debug.Assert(input != null, "input != null");
+
+            // map inputs
+            input.North = _playerNorth;
+            input.South = _playerSouth;
+            input.West = _playerWest;
+            input.East = _playerEast;
         }
     }
 }
