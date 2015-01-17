@@ -30,8 +30,6 @@ namespace GameLogic.Systems
             // update the positions
             position.X += velocity.X;
             position.Y += velocity.Y;
-
-            Trace.WriteLine(String.Format("{0},{1}", position.X, position.Y));
         }
     }
 }
