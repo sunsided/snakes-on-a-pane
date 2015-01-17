@@ -12,6 +12,11 @@ namespace GameLogic
     public interface ISystem
     {
         /// <summary>
+        /// Prepares the processing.
+        /// </summary>
+        void PreProcess();
+
+        /// <summary>
         /// Processes the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>

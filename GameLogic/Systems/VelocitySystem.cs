@@ -7,13 +7,13 @@ namespace GameLogic.Systems
     /// <summary>
     /// Class VelocitySystem. This class cannot be inherited.
     /// </summary>
-    public sealed class VelocitySystem : ISystem
+    public sealed class VelocitySystem : SystemBase
     {
         /// <summary>
         /// Processes the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        public void Process(IEntity entity)
+        public override void Process(IEntity entity)
         {
             if (ReferenceEquals(entity, null)) throw new ArgumentNullException("entity", "The given entity must not be null");
 

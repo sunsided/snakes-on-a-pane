@@ -10,7 +10,7 @@ namespace GameLogic.Systems
     /// <summary>
     /// Class RenderSystem. This class cannot be inherited.
     /// </summary>
-    public sealed class RenderSystem : ISystem
+    public sealed class RenderSystem : SystemBase
     {
         /// <summary>
         /// The render buffer
@@ -43,7 +43,7 @@ namespace GameLogic.Systems
         /// Processes the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        public void Process(IEntity entity)
+        public override void Process(IEntity entity)
         {
             if (ReferenceEquals(entity, null)) throw new ArgumentNullException("entity", "The given entity must not be null");
 

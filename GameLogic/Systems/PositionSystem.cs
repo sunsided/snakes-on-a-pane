@@ -7,13 +7,13 @@ namespace GameLogic.Systems
     /// <summary>
     /// Class PositionSystem. This class cannot be inherited.
     /// </summary>
-    public sealed class PositionSystem : ISystem
+    public sealed class PositionSystem : SystemBase
     {
         /// <summary>
         /// Processes the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        public void Process(IEntity entity)
+        public override void Process(IEntity entity)
         {
             if (ReferenceEquals(entity, null)) throw new ArgumentNullException("entity", "The given entity must not be null");
 

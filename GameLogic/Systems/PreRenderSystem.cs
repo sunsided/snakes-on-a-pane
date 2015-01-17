@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
-using GameLogic.Components;
 using GameLogic.Rendering;
 using JetBrains.Annotations;
 
@@ -10,7 +8,7 @@ namespace GameLogic.Systems
     /// <summary>
     /// Class PreRenderSystem. This class cannot be inherited.
     /// </summary>
-    public sealed class PreRenderSystem : ISystem
+    public sealed class PreRenderSystem : SystemBase
     {
         /// <summary>
         /// The render buffer
@@ -33,7 +31,7 @@ namespace GameLogic.Systems
         /// Processes the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        public void Process(IEntity entity)
+        public override void Process(IEntity entity)
         {
             var gr = _buffer.CurrentGraphics;
             gr.Clear(Color.Black);

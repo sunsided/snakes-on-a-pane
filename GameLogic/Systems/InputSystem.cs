@@ -9,7 +9,7 @@ namespace GameLogic.Systems
     /// <summary>
     /// Class InputSystem. This class cannot be inherited.
     /// </summary>
-    public sealed class InputSystem : ISystem
+    public sealed class InputSystem : SystemBase
     {
         /// <summary>
         /// Gets the player north key.
@@ -184,7 +184,7 @@ namespace GameLogic.Systems
         /// Processes the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        public void Process(IEntity entity)
+        public override void Process(IEntity entity)
         {
             if (ReferenceEquals(entity, null)) throw new ArgumentNullException("entity", "The given entity must not be null");
 
