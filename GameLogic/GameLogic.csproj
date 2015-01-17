@@ -48,9 +48,10 @@
     <Compile Include="Components\AABBComponent.cs" />
     <Compile Include="Components\InputComponent.cs" />
     <Compile Include="Components\ParallaxDistance.cs" />
+    <Compile Include="Components\VelocityComponent.cs" />
     <Compile Include="Components\PositionComponent.cs" />
     <Compile Include="Entities\Entity.cs" />
-    <Compile Include="IEntities.cs" />
+    <Compile Include="IProcessableEntities.cs" />
     <Compile Include="IProcessEntities.cs" />
     <Compile Include="ISystem.cs" />
     <Compile Include="IComponent.cs" />

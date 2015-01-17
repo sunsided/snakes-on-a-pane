@@ -155,6 +155,7 @@ namespace GameWindow
             player.AddComponent(new ColorComponent { Color = Color.DarkGreen });
             player.AddComponent(new AABBComponent { Width = 5F, Height = 5F });
             player.AddComponent(new InputComponent());
+            player.AddComponent(new VelocityComponent());
 
             var star = em.CreateEntity();
             star.AddComponent(new PositionComponent { X = 7F, Y = 7F });
