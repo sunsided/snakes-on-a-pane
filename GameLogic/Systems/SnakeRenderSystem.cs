@@ -73,7 +73,7 @@ namespace GameLogic.Systems
             Debug.Assert(tail != null, "tail != null");
 
             // constants
-            const float gridStep = 5F;
+            const float gridStep = 10F;
 
             // cache and calculate values
             var width = aabb.Width;
