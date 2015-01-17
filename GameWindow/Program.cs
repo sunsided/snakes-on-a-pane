@@ -97,8 +97,8 @@ namespace GameWindow
             systems.AddSystem(new InputSystem(form))
                 .AddSystem(new VelocitySystem())
                 .AddSystem(new DirectionChangeDetectionSystem())
-                .AddSystem(new PositionSystem())
                 .AddSystem(new TailCreaseSystem())
+                .AddSystem(new PositionSystem())
                 .AddSystem(new SnakeRenderSystem(bufferManager));
 
             // fire in the hole!
