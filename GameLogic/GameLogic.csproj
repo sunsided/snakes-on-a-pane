@@ -61,6 +61,7 @@
     <Compile Include="SystemManager.cs" />
     <Compile Include="Systems\InputSystem.cs" />
     <Compile Include="Systems\KeyState.cs" />
+    <Compile Include="Systems\VelocitySystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameLogic;
 using GameLogic.Components;
-using GameLogic.Entities;
 using GameLogic.Systems;
 using GameWindow.Rendering;
 
@@ -96,6 +95,7 @@ namespace GameWindow
             _systems = systems;
 
             systems.AddSystem(new InputSystem(form));
+            systems.AddSystem(new VelocitySystem());
 
             // fire in the hole!
             Application.Run(form);
