@@ -78,25 +78,48 @@ namespace GameLogic.Systems
             // cache and calculate values
             var width = aabb.Width;
             var height = aabb.Height;
-            var x = position.X * gridStep - width / 2F;
-            var y = position.Y * gridStep - height / 2F;
+            var px = position.X;
+            var py = position.Y;
+
+            var hw = width/2;
+            var hh = height/2;
 
             // prepare rendering
             var gr = _buffer.CurrentGraphics;
 
             // render the tail
-            var lastX = position.X * gridStep;
-            var lastY = position.Y * gridStep;
+            var lastX = px;
+            var lastY = py;
             foreach (var crease in tail.Creases)
             {
-                var cx = crease.X * gridStep;
-                var cy = crease.Y * gridStep;
-                gr.DrawLine(_whitePen, cx, cy, lastX, lastY);
+                var cx = crease.X;
+                var cy = crease.Y;
+
+                // crease is left of the head
+                if (cx < px && cy == lastY)
+                {
+                    gr.FillRectangle(_whiteBrush, cx * gridStep-hw, cy * gridStep-hh, (lastX - cx) * gridStep, (lastY - cy) * gridStep+height);
+                }
+                else if (cx > px && cy == lastY) // crease is right of the head
+                {
+
+                }
+                else if (cy < py) // crease is above the head
+                {
+
+                }
+                else if (cy > py) // crease is below the head
+                {
+
+                }
+
                 lastX = cx;
                 lastY = cy;
             }
 
             // render the head
+            var x = px * gridStep - hw;
+            var y = py * gridStep - hh;
             gr.FillRectangle(_whiteBrush, x, y, width, height);
         }
     }
