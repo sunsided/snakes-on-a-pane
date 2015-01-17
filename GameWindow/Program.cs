@@ -21,7 +21,7 @@ namespace GameWindow
         /// <summary>
         /// The game loop start event
         /// </summary>
-        private static ManualResetEventSlim _gameLoopStart = new ManualResetEventSlim(false);
+        private static readonly ManualResetEventSlim _gameLoopStart = new ManualResetEventSlim(false);
 
         /// <summary>
         /// The renderer
