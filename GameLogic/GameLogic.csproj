@@ -50,11 +50,13 @@
     <Compile Include="Components\ParallaxDistance.cs" />
     <Compile Include="Components\PositionComponent.cs" />
     <Compile Include="Entities\Entity.cs" />
+    <Compile Include="IEntities.cs" />
     <Compile Include="IProcessEntities.cs" />
     <Compile Include="ISystem.cs" />
     <Compile Include="IComponent.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EntityManager.cs" />
     <Compile Include="SystemManager.cs" />
     <Compile Include="Systems\InputSystem.cs" />
     <Compile Include="Systems\KeyState.cs" />
