@@ -41,7 +41,7 @@ namespace GameWindow
         static void Main()
         {
             // initializes the game world
-            CreateGame();
+            var entities = CreateGame();
 
             // cancellation tokens for game shutdown
             var cts = new CancellationTokenSource();
@@ -140,25 +140,29 @@ namespace GameWindow
         /// <summary>
         /// Creates the game.
         /// </summary>
-        private static void CreateGame()
+        private static IProcessableEntities CreateGame()
         {
-            var player = new Entity();
+            var em = new EntityManager();
+
+            var player = em.CreateEntity();
             player.AddComponent(new PositionComponent { X = 0F, Y = 0F });
             player.AddComponent(new ColorComponent { Color = Color.DarkGreen });
             player.AddComponent(new AABBComponent { Width = 5F, Height = 5F });
             player.AddComponent(new InputComponent());
 
-            var star = new Entity();
+            var star = em.CreateEntity();
             star.AddComponent(new PositionComponent { X = 7F, Y = 7F });
             star.AddComponent(new ColorComponent { Color = Color.White });
             star.AddComponent(new AABBComponent { Width = 0.5F, Height = 0.5F });
             star.AddComponent(new ParallaxComponent { Distance = 1 });
 
-            var star2 = new Entity();
+            var star2 = em.CreateEntity();
             star2.AddComponent(new PositionComponent { X = 7F, Y = 7F });
             star2.AddComponent(new ColorComponent { Color = Color.White });
             star2.AddComponent(new AABBComponent { Width = 0.5F, Height = 0.5F });
             star2.AddComponent(new ParallaxComponent { Distance = 10 });
+
+            return em;
         }
     }
 }
