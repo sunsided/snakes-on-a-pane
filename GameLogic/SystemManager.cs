@@ -42,6 +42,8 @@ namespace GameLogic
             for (var i = 0; i < systemCount; ++i)
             {
                 var system = systems[i];
+                system.PreProcess();
+
                 foreach (var entity in entities)
                 {
                     system.Process(entity);
