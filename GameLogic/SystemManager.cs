@@ -7,7 +7,7 @@ namespace GameLogic
     /// <summary>
     /// Class SystemManager. This class cannot be inherited.
     /// </summary>
-    public sealed class SystemManager
+    public sealed class SystemManager : IProcessEntities
     {
         /// <summary>
         /// The registered systems

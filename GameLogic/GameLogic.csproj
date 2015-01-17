@@ -50,6 +50,7 @@
     <Compile Include="Components\ParallaxDistance.cs" />
     <Compile Include="Components\PositionComponent.cs" />
     <Compile Include="Entities\Entity.cs" />
+    <Compile Include="IProcessEntities.cs" />
     <Compile Include="ISystem.cs" />
     <Compile Include="IComponent.cs" />
     <Compile Include="IEntity.cs" />
