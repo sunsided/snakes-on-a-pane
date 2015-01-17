@@ -161,7 +161,7 @@ namespace GameWindow
             player.AddComponent(new InputComponent());
             player.AddComponent(new VelocityComponent());
             player.AddComponent(new DirectionChangeComponent());
-            player.AddComponent(new TailComponent());
+            player.AddComponent(new TailComponent { Length = 10 });
 
             var star = em.CreateEntity();
             star.AddComponent(new PositionComponent { X = 7F, Y = 7F });
