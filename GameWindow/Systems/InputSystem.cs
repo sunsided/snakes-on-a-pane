@@ -73,23 +73,7 @@ namespace GameWindow.Systems
             get { return _playerEastKey; }
             private set { _playerEastKey = value; }
         }
-
-        /// <summary>
-        /// Enum KeyState
-        /// </summary>
-        private enum KeyState
-        {
-            /// <summary>
-            /// The key is not pressed
-            /// </summary>
-            Unpressed,
-
-            /// <summary>
-            /// The key is pressed
-            /// </summary>
-            Pressed
-        }
-
+        
         /// <summary>
         /// The player north state
         /// </summary>

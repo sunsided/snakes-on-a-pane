@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\InputComponent.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +70,7 @@
     <Compile Include="Rendering\RenderTarget.Designer.cs">
       <DependentUpon>RenderTarget.cs</DependentUpon>
     </Compile>
+    <Compile Include="Systems\KeyState.cs" />
     <Compile Include="Systems\InputSystem.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
