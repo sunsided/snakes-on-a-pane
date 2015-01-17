@@ -15,25 +15,25 @@ namespace GameWindow.Systems
         /// Gets the player north key.
         /// </summary>
         /// <value>The player north key.</value>
-        private Keys _playerNorthKey = Keys.Up;
+        private Keys _playerNorthKey = Keys.W;
 
         /// <summary>
         /// Gets the player south key.
         /// </summary>
         /// <value>The player south key.</value>
-        private Keys _playerSouthKey = Keys.Down;
+        private Keys _playerSouthKey = Keys.A;
 
         /// <summary>
         /// Gets the player west key.
         /// </summary>
         /// <value>The player west key.</value>
-        private Keys _playerWestKey = Keys.Left;
+        private Keys _playerWestKey = Keys.S;
 
         /// <summary>
         /// Gets the player east key.
         /// </summary>
         /// <value>The player east key.</value>
-        private Keys _playerEastKey = Keys.Right;
+        private Keys _playerEastKey = Keys.D;
 
         /// <summary>
         /// Gets the player north key.
