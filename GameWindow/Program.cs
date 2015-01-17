@@ -35,13 +35,18 @@ namespace GameWindow
         private static IProcessEntities _systems;
 
         /// <summary>
+        /// The entites
+        /// </summary>
+        private static IProcessableEntities _entites;
+
+        /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
             // initializes the game world
-            var entities = CreateGame();
+            _entites = CreateGame();
 
             // cancellation tokens for game shutdown
             var cts = new CancellationTokenSource();
@@ -110,7 +115,8 @@ namespace GameWindow
 
             // fetch the renderer and the systems
             var renderer = _renderer;
-            var systens = _systems;
+            var systems = _systems;
+            var entities = _entites;
 
             // prepare throughput measurement
             var counter = 0;
@@ -122,7 +128,7 @@ namespace GameWindow
                 Thread.Sleep(1000/*ms per second*/ / 10 /*frames per second*/);
 
                 // process the entities
-                systens.Process(null /* this will fail */);
+                entities.ProcessWith(systems);
 
                 // render a frame
                 renderer.Render();
