@@ -53,6 +53,7 @@
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="IProcessableEntities.cs" />
     <Compile Include="IProcessEntities.cs" />
+    <Compile Include="Rendering\IRenderBuffer.cs" />
     <Compile Include="ISystem.cs" />
     <Compile Include="IComponent.cs" />
     <Compile Include="IEntity.cs" />

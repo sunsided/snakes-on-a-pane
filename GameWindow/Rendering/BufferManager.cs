@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Threading;
+using GameLogic.Rendering;
 using JetBrains.Annotations;
 
 namespace GameWindow.Rendering
@@ -11,7 +12,7 @@ namespace GameWindow.Rendering
     /// <summary>
     /// Class BufferManager. This class cannot be inherited.
     /// </summary>
-    sealed class BufferManager
+    sealed class BufferManager : IRenderBuffer
     {
         /// <summary>
         /// The buffer array
