@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GameLogic;
 using GameLogic.Components;
 using GameLogic.Entities;
 using GameLogic.Systems;
@@ -80,8 +81,9 @@ namespace GameWindow
                                 gameLoop.Wait();
                             };
 
-            // create the input system
-            var inputSystem = new InputSystem(form);
+            // create the system manager
+            var systems = new SystemManager();
+            systems.AddSystem(new InputSystem(form));
 
             // fire in the hole!
             Application.Run(form);
