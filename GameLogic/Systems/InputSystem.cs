@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using GameLogic.Components;
 using JetBrains.Annotations;
 
 namespace GameLogic.Systems
@@ -8,7 +9,7 @@ namespace GameLogic.Systems
     /// <summary>
     /// Class InputSystem. This class cannot be inherited.
     /// </summary>
-    sealed class InputSystem : ISystem
+    public sealed class InputSystem : ISystem
     {
         /// <summary>
         /// Gets the player north key.
@@ -177,6 +178,26 @@ namespace GameLogic.Systems
             {
                 e.Handled = false;
             }
+        }
+
+        /// <summary>
+        /// Processes the specified entity.
+        /// </summary>
+        /// <param name="entity">The entity.</param>
+        public void Process(IEntity entity)
+        {
+            if (ReferenceEquals(entity, null)) throw new ArgumentNullException("entity", "The given entity must not be null");
+
+            // fetch the input component
+            InputComponent input;
+            if (!entity.TryGetComponent(out input)) return;
+            Debug.Assert(input != null, "input != null");
+
+            // map inputs
+            input.North = _playerNorth;
+            input.South = _playerSouth;
+            input.West = _playerWest;
+            input.East = _playerEast;
         }
     }
 }

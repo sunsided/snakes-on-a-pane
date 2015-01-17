@@ -4,10 +4,11 @@ using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GameLogic;
 using GameLogic.Components;
 using GameLogic.Entities;
+using GameLogic.Systems;
 using GameWindow.Rendering;
-using GameWindow.Systems;
 
 namespace GameWindow
 {
@@ -29,13 +30,23 @@ namespace GameWindow
         private static IRenderer _renderer;
 
         /// <summary>
+        /// The processing systems
+        /// </summary>
+        private static IProcessEntities _systems;
+
+        /// <summary>
+        /// The entites
+        /// </summary>
+        private static IProcessableEntities _entites;
+
+        /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
             // initializes the game world
-            CreateGame();
+            _entites = CreateGame();
 
             // cancellation tokens for game shutdown
             var cts = new CancellationTokenSource();
@@ -80,8 +91,11 @@ namespace GameWindow
                                 gameLoop.Wait();
                             };
 
-            // create the input system
-            var inputSystem = new InputSystem(form);
+            // create the system manager
+            var systems = new SystemManager();
+            _systems = systems;
+
+            systems.AddSystem(new InputSystem(form));
 
             // fire in the hole!
             Application.Run(form);
@@ -99,8 +113,10 @@ namespace GameWindow
             _gameLoopStart.Wait(ct);
             ct.ThrowIfCancellationRequested();
 
-            // fetch the renderer
+            // fetch the renderer and the systems
             var renderer = _renderer;
+            var systems = _systems;
+            var entities = _entites;
 
             // prepare throughput measurement
             var counter = 0;
@@ -110,6 +126,9 @@ namespace GameWindow
             while (!ct.IsCancellationRequested)
             {
                 Thread.Sleep(1000/*ms per second*/ / 10 /*frames per second*/);
+
+                // process the entities
+                entities.ProcessWith(systems);
 
                 // render a frame
                 renderer.Render();
@@ -127,25 +146,29 @@ namespace GameWindow
         /// <summary>
         /// Creates the game.
         /// </summary>
-        private static void CreateGame()
+        private static IProcessableEntities CreateGame()
         {
-            var player = new Entity();
+            var em = new EntityManager();
+
+            var player = em.CreateEntity();
             player.AddComponent(new PositionComponent { X = 0F, Y = 0F });
             player.AddComponent(new ColorComponent { Color = Color.DarkGreen });
             player.AddComponent(new AABBComponent { Width = 5F, Height = 5F });
             player.AddComponent(new InputComponent());
 
-            var star = new Entity();
+            var star = em.CreateEntity();
             star.AddComponent(new PositionComponent { X = 7F, Y = 7F });
             star.AddComponent(new ColorComponent { Color = Color.White });
             star.AddComponent(new AABBComponent { Width = 0.5F, Height = 0.5F });
             star.AddComponent(new ParallaxComponent { Distance = 1 });
 
-            var star2 = new Entity();
+            var star2 = em.CreateEntity();
             star2.AddComponent(new PositionComponent { X = 7F, Y = 7F });
             star2.AddComponent(new ColorComponent { Color = Color.White });
             star2.AddComponent(new AABBComponent { Width = 0.5F, Height = 0.5F });
             star2.AddComponent(new ParallaxComponent { Distance = 10 });
+
+            return em;
         }
     }
 }

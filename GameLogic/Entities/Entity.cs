@@ -62,5 +62,26 @@ namespace GameLogic.Entities
 
             throw new InvalidOperationException("No component of the given type was registered.");
         }
+
+        /// <summary>
+        /// Tries to obtains the component of the given type.
+        /// </summary>
+        /// <typeparam name="TComponent">The type of the component.</typeparam>
+        /// <param name="component">The component, if it exists.</param>
+        /// <returns><see langword="true" /> if the component exists, <see langword="false" /> otherwise.</returns>
+        public bool TryGetComponent<TComponent>([CanBeNull] out TComponent component)
+            where TComponent : IComponent
+        {
+            var key = typeof(TComponent);
+            IComponent componentInterface;
+            if (_components.TryGetValue(key, out componentInterface))
+            {
+                component = (TComponent) componentInterface;
+                return true;
+            }
+
+            component = default(TComponent);
+            return false;
+        }
     }
 }
