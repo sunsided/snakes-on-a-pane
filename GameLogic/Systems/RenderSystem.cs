@@ -67,8 +67,10 @@ namespace GameLogic.Systems
             if (!entity.TryGetComponent(out position)) return;
             Debug.Assert(position != null, "position != null");
 
-            // positions
-            const float gridStep = 10F;
+            // constants
+            const float gridStep = 5F;
+
+            // cache and calculate values
             var width = aabb.Width;
             var height = aabb.Height;
             var x = position.X * gridStep - width / 2F;
