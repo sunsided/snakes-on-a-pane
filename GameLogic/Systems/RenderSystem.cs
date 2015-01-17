@@ -40,6 +40,16 @@ namespace GameLogic.Systems
         }
 
         /// <summary>
+        /// Prepares the processing.
+        /// </summary>
+        public override void PreProcess()
+        {
+            // clear the buffer
+            var gr = _buffer.CurrentGraphics;
+            gr.Clear(Color.Black);
+        }
+
+        /// <summary>
         /// Processes the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
