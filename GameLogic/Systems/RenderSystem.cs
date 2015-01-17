@@ -24,6 +24,11 @@ namespace GameLogic.Systems
         private readonly Pen _whitePen = new Pen(Color.White);
 
         /// <summary>
+        /// A white brush
+        /// </summary>
+        private readonly SolidBrush _whiteBrush = new SolidBrush(Color.White);
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="RenderSystem"/> class.
         /// </summary>
         /// <param name="buffer">The buffer.</param>
@@ -53,14 +58,15 @@ namespace GameLogic.Systems
             Debug.Assert(position != null, "position != null");
 
             // positions
+            const float gridStep = 10F;
             var width = aabb.Width;
             var height = aabb.Height;
-            var x = position.X - width/2F;
-            var y = position.Y - height/2F;
+            var x = position.X * gridStep - width / 2F;
+            var y = position.Y * gridStep - height / 2F;
 
             // render the element
             var gr = _buffer.CurrentGraphics;
-            gr.DrawRectangle(_whitePen, x, y, width, height);
+            gr.FillRectangle(_whiteBrush, x, y, width, height);
         }
     }
 }
