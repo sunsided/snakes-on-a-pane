@@ -96,21 +96,21 @@ namespace GameLogic.Systems
                 var cy = crease.Y;
 
                 // crease is left of the head
-                if (cx < px && cy == lastY)
+                if (cx < lastX && cy == lastY)
                 {
-                    gr.FillRectangle(_whiteBrush, cx * gridStep-hw, cy * gridStep-hh, (lastX - cx) * gridStep, (lastY - cy) * gridStep+height);
+                    gr.FillRectangle(_whiteBrush, cx * gridStep-hw, cy * gridStep-hh, (lastX - cx) * gridStep, height);
                 }
-                else if (cx > px && cy == lastY) // crease is right of the head
+                else if (cx > lastX && cy == lastY) // crease is right of the head
                 {
-
+                    gr.FillRectangle(_whiteBrush, lastX * gridStep + hw, lastY * gridStep - hh, (cx - lastX) * gridStep, height);
                 }
-                else if (cy < py) // crease is above the head
+                else if (cy < lastY && cx == lastX) // crease is above the head
                 {
-
+                    gr.FillRectangle(_whiteBrush, cx * gridStep - hw, cy * gridStep - hh, width, (lastY - cy) * gridStep + height);
                 }
-                else if (cy > py) // crease is below the head
+                else if (cy > lastY && cx == lastX) // crease is below the head
                 {
-
+                    gr.FillRectangle(_whiteBrush, lastX * gridStep - hw, lastY * gridStep - hh, width, (cy - lastY) * gridStep + height);
                 }
 
                 lastX = cx;
