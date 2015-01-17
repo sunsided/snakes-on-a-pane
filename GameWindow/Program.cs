@@ -8,6 +8,7 @@ using GameLogic.Components;
 using GameLogic.Entities;
 using GameWindow.Components;
 using GameWindow.Rendering;
+using GameWindow.Systems;
 
 namespace GameWindow
 {
@@ -79,6 +80,9 @@ namespace GameWindow
                                 // ReSharper disable once MethodSupportsCancellation
                                 gameLoop.Wait();
                             };
+
+            // create the input system
+            var inputSystem = new InputSystem(form);
 
             // fire in the hole!
             Application.Run(form);
