@@ -22,12 +22,12 @@ namespace GameLogic.Systems
             if (!entity.TryGetComponent(out velocity)) return;
             Debug.Assert(velocity != null, "velocity != null");
 
-            // fetch the position component
+            // fetch the direction change component
             DirectionChangeComponent directionChange;
             if (!entity.TryGetComponent(out directionChange)) return;
             Debug.Assert(directionChange != null, "directionChange != null");
 
-            // update the positions
+            // update the flags
             const float epsilon = 0.001F;
             directionChange.DirectionChanged = Math.Abs(directionChange.PreviousXVelocity - velocity.X) > epsilon ||
                                                Math.Abs(directionChange.PreviousYVelocity - velocity.Y) > epsilon;
