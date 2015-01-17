@@ -81,8 +81,22 @@ namespace GameLogic.Systems
             var x = position.X * gridStep - width / 2F;
             var y = position.Y * gridStep - height / 2F;
 
-            // render the element
+            // prepare rendering
             var gr = _buffer.CurrentGraphics;
+
+            // render the tail
+            var lastX = position.X * gridStep;
+            var lastY = position.Y * gridStep;
+            foreach (var crease in tail.Creases)
+            {
+                var cx = crease.X * gridStep;
+                var cy = crease.Y * gridStep;
+                gr.DrawLine(_whitePen, cx, cy, lastX, lastY);
+                lastX = cx;
+                lastY = cy;
+            }
+
+            // render the head
             gr.FillRectangle(_whiteBrush, x, y, width, height);
         }
     }
