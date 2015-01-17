@@ -96,6 +96,7 @@ namespace GameWindow
 
             systems.AddSystem(new InputSystem(form));
             systems.AddSystem(new VelocitySystem());
+            systems.AddSystem(new PositionSystem());
 
             // fire in the hole!
             Application.Run(form);
