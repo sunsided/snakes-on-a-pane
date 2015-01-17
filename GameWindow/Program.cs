@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameLogic.Components;
 using GameLogic.Entities;
+using GameLogic.Systems;
 using GameWindow.Rendering;
-using GameWindow.Systems;
 
 namespace GameWindow
 {
