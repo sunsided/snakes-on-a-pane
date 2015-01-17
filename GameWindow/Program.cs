@@ -158,6 +158,7 @@ namespace GameWindow
             player.AddComponent(new AABBComponent { Width = 5F, Height = 5F });
             player.AddComponent(new InputComponent());
             player.AddComponent(new VelocityComponent());
+            player.AddComponent(new DirectionChangeComponent());
             player.AddComponent(new TailComponent());
 
             var star = em.CreateEntity();

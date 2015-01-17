@@ -49,6 +49,7 @@
     <Compile Include="Components\InputComponent.cs" />
     <Compile Include="Components\ParallaxDistance.cs" />
     <Compile Include="Components\TailComponent.cs" />
+    <Compile Include="Components\DirectionChangeComponent.cs" />
     <Compile Include="Components\VelocityComponent.cs" />
     <Compile Include="Components\PositionComponent.cs" />
     <Compile Include="Entities\Entity.cs" />
