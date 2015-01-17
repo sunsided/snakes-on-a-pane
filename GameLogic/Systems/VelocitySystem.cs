@@ -28,7 +28,7 @@ namespace GameLogic.Systems
             Debug.Assert(velocity != null, "velocity != null");
 
             // define velocities
-            const float upVelocity = 1.0F;
+            const float upVelocity = -1.0F;
             const float downVelocity = -upVelocity;
             const float leftVelocity = -1.0F;
             const float rightVelocity = -leftVelocity;
