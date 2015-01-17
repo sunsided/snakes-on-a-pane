@@ -21,13 +21,13 @@ namespace GameLogic.Systems
         /// Gets the player south key.
         /// </summary>
         /// <value>The player south key.</value>
-        private Keys _playerSouthKey = Keys.A;
+        private Keys _playerSouthKey = Keys.S;
 
         /// <summary>
         /// Gets the player west key.
         /// </summary>
         /// <value>The player west key.</value>
-        private Keys _playerWestKey = Keys.S;
+        private Keys _playerWestKey = Keys.A;
 
         /// <summary>
         /// Gets the player east key.
