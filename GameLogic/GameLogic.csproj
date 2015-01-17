@@ -51,6 +51,7 @@
     <Compile Include="Components\VelocityComponent.cs" />
     <Compile Include="Components\PositionComponent.cs" />
     <Compile Include="Entities\Entity.cs" />
+    <Compile Include="SystemBase.cs" />
     <Compile Include="IProcessableEntities.cs" />
     <Compile Include="IProcessEntities.cs" />
     <Compile Include="Rendering\IRenderBuffer.cs" />
