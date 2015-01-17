@@ -30,6 +30,11 @@ namespace GameWindow
         private static IRenderer _renderer;
 
         /// <summary>
+        /// The processing systems
+        /// </summary>
+        private static IProcessEntities _systems;
+
+        /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
@@ -83,6 +88,8 @@ namespace GameWindow
 
             // create the system manager
             var systems = new SystemManager();
+            _systems = systems;
+
             systems.AddSystem(new InputSystem(form));
 
             // fire in the hole!
@@ -101,8 +108,9 @@ namespace GameWindow
             _gameLoopStart.Wait(ct);
             ct.ThrowIfCancellationRequested();
 
-            // fetch the renderer
+            // fetch the renderer and the systems
             var renderer = _renderer;
+            var systens = _systems;
 
             // prepare throughput measurement
             var counter = 0;
@@ -112,6 +120,9 @@ namespace GameWindow
             while (!ct.IsCancellationRequested)
             {
                 Thread.Sleep(1000/*ms per second*/ / 10 /*frames per second*/);
+
+                // process the entities
+                systens.Process(null /* this will fail */);
 
                 // render a frame
                 renderer.Render();
