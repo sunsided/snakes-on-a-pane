@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameLogic.Components;
 using GameLogic.Entities;
-using GameWindow.Components;
 using GameWindow.Rendering;
 using GameWindow.Systems;
 

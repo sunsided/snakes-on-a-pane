@@ -1,7 +1,6 @@
-﻿using GameLogic;
-using GameWindow.Systems;
+﻿using GameLogic.Systems;
 
-namespace GameWindow.Components
+namespace GameLogic.Components
 {
     /// <summary>
     /// Struct InputComponent
