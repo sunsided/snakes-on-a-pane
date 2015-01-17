@@ -8,7 +8,7 @@ namespace GameLogic.Systems
     /// <summary>
     /// Class InputSystem. This class cannot be inherited.
     /// </summary>
-    sealed class InputSystem : ISystem
+    public sealed class InputSystem : ISystem
     {
         /// <summary>
         /// Gets the player north key.
