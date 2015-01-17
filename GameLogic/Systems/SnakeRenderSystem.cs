@@ -10,7 +10,7 @@ namespace GameLogic.Systems
     /// <summary>
     /// Class RenderSystem. This class cannot be inherited.
     /// </summary>
-    public sealed class RenderSystem : SystemBase
+    public sealed class SnakeRenderSystem : SystemBase
     {
         /// <summary>
         /// The render buffer
@@ -29,11 +29,11 @@ namespace GameLogic.Systems
         private readonly SolidBrush _whiteBrush = new SolidBrush(Color.White);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RenderSystem"/> class.
+        /// Initializes a new instance of the <see cref="SnakeRenderSystem"/> class.
         /// </summary>
         /// <param name="buffer">The buffer.</param>
         /// <exception cref="System.ArgumentNullException">Render buffer instance must not be null</exception>
-        public RenderSystem([NotNull] IRenderBuffer buffer)
+        public SnakeRenderSystem([NotNull] IRenderBuffer buffer)
         {
             if(ReferenceEquals(buffer, null)) throw new ArgumentNullException("buffer", "Render buffer instance must not be null");
             _buffer = buffer;
@@ -66,6 +66,11 @@ namespace GameLogic.Systems
             PositionComponent position;
             if (!entity.TryGetComponent(out position)) return;
             Debug.Assert(position != null, "position != null");
+
+            // fetch the tail component
+            TailComponent tail;
+            if (!entity.TryGetComponent(out tail)) return;
+            Debug.Assert(tail != null, "tail != null");
 
             // constants
             const float gridStep = 5F;
