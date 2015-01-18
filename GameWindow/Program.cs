@@ -94,10 +94,12 @@ namespace GameWindow
             var systems = new SystemManager();
             _systems = systems;
 
-            systems.AddSystem(new InputSystem(form));
-            systems.AddSystem(new VelocitySystem());
-            systems.AddSystem(new PositionSystem());
-            systems.AddSystem(new RenderSystem(bufferManager));
+            systems.AddSystem(new InputSystem(form))
+                .AddSystem(new VelocitySystem())
+                .AddSystem(new DirectionChangeDetectionSystem())
+                .AddSystem(new TailCreaseSystem())
+                .AddSystem(new PositionSystem())
+                .AddSystem(new SnakeRenderSystem(bufferManager));
 
             // fire in the hole!
             Application.Run(form);
@@ -153,11 +155,13 @@ namespace GameWindow
             var em = new EntityManager();
 
             var player = em.CreateEntity();
-            player.AddComponent(new PositionComponent { X = 0F, Y = 0F });
+            player.AddComponent(new PositionComponent { X = 20F, Y = 20F });
             player.AddComponent(new ColorComponent { Color = Color.DarkGreen });
-            player.AddComponent(new AABBComponent { Width = 5F, Height = 5F });
+            player.AddComponent(new AABBComponent { Width = 10F, Height = 10F });
             player.AddComponent(new InputComponent());
             player.AddComponent(new VelocityComponent());
+            player.AddComponent(new DirectionChangeComponent());
+            player.AddComponent(new TailComponent { Length = 10 });
 
             var star = em.CreateEntity();
             star.AddComponent(new PositionComponent { X = 7F, Y = 7F });

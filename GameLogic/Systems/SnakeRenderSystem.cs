@@ -10,7 +10,7 @@ namespace GameLogic.Systems
     /// <summary>
     /// Class RenderSystem. This class cannot be inherited.
     /// </summary>
-    public sealed class RenderSystem : SystemBase
+    public sealed class SnakeRenderSystem : SystemBase
     {
         /// <summary>
         /// The render buffer
@@ -29,11 +29,11 @@ namespace GameLogic.Systems
         private readonly SolidBrush _whiteBrush = new SolidBrush(Color.White);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RenderSystem"/> class.
+        /// Initializes a new instance of the <see cref="SnakeRenderSystem"/> class.
         /// </summary>
         /// <param name="buffer">The buffer.</param>
         /// <exception cref="System.ArgumentNullException">Render buffer instance must not be null</exception>
-        public RenderSystem([NotNull] IRenderBuffer buffer)
+        public SnakeRenderSystem([NotNull] IRenderBuffer buffer)
         {
             if(ReferenceEquals(buffer, null)) throw new ArgumentNullException("buffer", "Render buffer instance must not be null");
             _buffer = buffer;
@@ -67,15 +67,59 @@ namespace GameLogic.Systems
             if (!entity.TryGetComponent(out position)) return;
             Debug.Assert(position != null, "position != null");
 
-            // positions
+            // fetch the tail component
+            TailComponent tail;
+            if (!entity.TryGetComponent(out tail)) return;
+            Debug.Assert(tail != null, "tail != null");
+
+            // constants
             const float gridStep = 10F;
+
+            // cache and calculate values
             var width = aabb.Width;
             var height = aabb.Height;
-            var x = position.X * gridStep - width / 2F;
-            var y = position.Y * gridStep - height / 2F;
+            var px = position.X;
+            var py = position.Y;
 
-            // render the element
+            var hw = width/2;
+            var hh = height/2;
+
+            // prepare rendering
             var gr = _buffer.CurrentGraphics;
+
+            // render the tail
+            var lastX = px;
+            var lastY = py;
+            foreach (var crease in tail.Creases)
+            {
+                var cx = crease.X;
+                var cy = crease.Y;
+
+                // crease is left of the head
+                if (cx < lastX && cy == lastY)
+                {
+                    gr.FillRectangle(_whiteBrush, cx * gridStep-hw, cy * gridStep-hh, (lastX - cx) * gridStep, height);
+                }
+                else if (cx > lastX && cy == lastY) // crease is right of the head
+                {
+                    gr.FillRectangle(_whiteBrush, lastX * gridStep + hw, lastY * gridStep - hh, (cx - lastX) * gridStep, height);
+                }
+                else if (cy < lastY && cx == lastX) // crease is above the head
+                {
+                    gr.FillRectangle(_whiteBrush, cx * gridStep - hw, cy * gridStep - hh, width, (lastY - cy) * gridStep + height);
+                }
+                else if (cy > lastY && cx == lastX) // crease is below the head
+                {
+                    gr.FillRectangle(_whiteBrush, lastX * gridStep - hw, lastY * gridStep - hh, width, (cy - lastY) * gridStep + height);
+                }
+
+                lastX = cx;
+                lastY = cy;
+            }
+
+            // render the head
+            var x = px * gridStep - hw;
+            var y = py * gridStep - hh;
             gr.FillRectangle(_whiteBrush, x, y, width, height);
         }
     }
