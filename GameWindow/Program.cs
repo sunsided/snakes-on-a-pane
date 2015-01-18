@@ -163,6 +163,10 @@ namespace GameWindow
             player.AddComponent(new DirectionChangeComponent());
             player.AddComponent(new TailComponent { Length = 10 });
 
+            var food = em.CreateEntity();
+            food.AddComponent(new PositionComponent { X = 7F, Y = 7F });
+            food.AddComponent(new FoodComponent { Value = 1 });
+
             var star = em.CreateEntity();
             star.AddComponent(new PositionComponent { X = 7F, Y = 7F });
             star.AddComponent(new ColorComponent { Color = Color.White });
